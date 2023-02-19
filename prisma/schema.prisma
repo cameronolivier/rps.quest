@@ -56,8 +56,8 @@ model User {
 }
 
 model Weapon {
-  id              String @id @default(cuid())
-  name            String
+  id              Int    @id @default(autoincrement())
+  name            String @unique
   gameUser1Weapon Game[] @relation(name: "User1WeaponGames")
   gameUser2Weapon Game[] @relation(name: "User2WeaponGames")
 }
@@ -73,9 +73,9 @@ model Game {
   winner          User?    @relation(name: "WinnerGames", fields: [winnerId], references: [id])
   winnerId        String?
   player1Weapon   Weapon?  @relation(name: "User1WeaponGames", fields: [player1WeaponId], references: [id])
-  player1WeaponId String?
+  player1WeaponId Int?
   player2Weapon   Weapon?  @relation(name: "User2WeaponGames", fields: [player2WeaponId], references: [id])
-  player2WeaponId String?
+  player2WeaponId Int?
 }
 
 // model User {

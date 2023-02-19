@@ -1,16 +1,21 @@
 import { prisma } from "../src/server/db";
 
 async function main() {
-  const id = "cl9ebqhxk00003b600tymydho";
-  await prisma.example.upsert({
-    where: {
-      id,
-    },
-    create: {
-      id,
-    },
-    update: {},
-  });
+  const weapons = [
+    {name: 'rock'},
+    {name: 'paper'},
+    {name: 'scissors'},
+  ]
+
+    await prisma.weapon.upsert({
+      where: {
+        name: 'rock',
+      },
+      create: {
+        name: 'rock'
+      },
+      update: {},
+    });
 }
 
 main()
