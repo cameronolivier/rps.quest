@@ -2,65 +2,101 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
-}
-
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  provider = "sqlite"
+  // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
+  // Further reading:
+  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
+  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
+  url      = env("DATABASE_URL")
 }
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? // @db.Text
-    access_token      String? // @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? // @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? // @db.Text
+  access_token      String? // @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? // @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+  id            String    @id @default(cuid())
+  name          String?
+  nickname      String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  gameUser1     Game[]    @relation(name: "User1Games")
+  gameUser2     Game[]    @relation(name: "User2Games")
+  winner        Game[]    @relation(name: "WinnerGames")
 }
 
-model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+model Weapon {
+  id              String @id @default(cuid())
+  name            String
+  gameUser1Weapon Game[] @relation(name: "User1WeaponGames")
+  gameUser2Weapon Game[] @relation(name: "User2WeaponGames")
+}
 
-    @@unique([identifier, token])
+model Game {
+  id              String   @id @default(cuid())
+  name            String
+  createdAt       DateTime @default(now())
+  player1Id       String?
+  player1         User?    @relation(name: "User1Games", fields: [player1Id], references: [id])
+  player2Id       String?
+  player2         User?    @relation(name: "User2Games", fields: [player2Id], references: [id])
+  winner          User?    @relation(name: "WinnerGames", fields: [winnerId], references: [id])
+  winnerId        String?
+  player1Weapon   Weapon?  @relation(name: "User1WeaponGames", fields: [player1WeaponId], references: [id])
+  player1WeaponId String?
+  player2Weapon   Weapon?  @relation(name: "User2WeaponGames", fields: [player2WeaponId], references: [id])
+  player2WeaponId String?
+}
+
+// model User {
+//   id        String @id @default(cuid())
+//   name      String
+//   posts     Post[] @relation(name: "UserPosts")
+//   bookmarks Post[] @relation(name: "UserBookmarks")
+// }
+//
+// model Post {
+//   id           String  @id @default(cuid())
+//   title        String
+//   author       User?   @relation(name: "UserPosts", fields: [userId], references: [id])
+//   bookmarkedBy User?   @relation(name: "UserBookmarks", fields: [userId], references: [id])
+//   userId       String?
+// }
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }

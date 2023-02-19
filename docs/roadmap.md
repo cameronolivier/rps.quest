@@ -12,6 +12,7 @@
 - We'd want to store player 1, player 2 and their choices from the enum (R/P/S) in the flat file (this would require fs 
   write though). Maybe like p1:r, p2:s
 - _yjs might be fun. but overkill (or what?) I think it requires concurrency to work (as in both active at once)_
+- yjs is on the tech radar so there's that.
 - Ok, so we need to store the game state on a game object. We could arguably use a [gameId].txt file flat-file 
    structure to store this, because why not. This would mean we could get away without any DB interaction, however, 
    we'll need it shortly after completing this so it might be worthwhile. But as an agnostic RPS game it could work. 
