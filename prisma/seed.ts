@@ -1,21 +1,38 @@
 import { prisma } from "../src/server/db";
 
 async function main() {
-  const weapons = [
-    {name: 'rock'},
-    {name: 'paper'},
-    {name: 'scissors'},
-  ]
+  await prisma.weapon.upsert({
+    where: {
+      id: 1,
+    },
+    create: {
+      id: 1,
+      name: 'rock'
+    },
+    update: {},
+  });
 
-    await prisma.weapon.upsert({
-      where: {
-        name: 'rock',
-      },
-      create: {
-        name: 'rock'
-      },
-      update: {},
-    });
+  await prisma.weapon.upsert({
+    where: {
+      id: 2,
+    },
+    create: {
+      id: 2,
+      name: 'paper'
+    },
+    update: {},
+  });
+
+  await prisma.weapon.upsert({
+    where: {
+      id: 3,
+    },
+    create: {
+      id: 3,
+      name: 'scissors'
+    },
+    update: {},
+  });
 }
 
 main()
