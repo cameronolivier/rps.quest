@@ -8,7 +8,13 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "db-seed": "NODE_ENV=development prisma db seed"
+    "db-seed": "NODE_ENV=development prisma db seed",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "lint:check": "pnpm run lint",
+    "lint:fix": "pnpm run lint -- --fix",
+    "code:check": "pnpm run prettier:check && pnpm run lint:check",
+    "code:fix": "pnpm run prettier:fix && pnpm run lint:fix"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",

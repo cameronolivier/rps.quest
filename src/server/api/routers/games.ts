@@ -1,6 +1,6 @@
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid';
 
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, publicProcedure } from '../trpc';
 
 export const gamesRouter = createTRPCRouter({
   create: publicProcedure.mutation(() => {

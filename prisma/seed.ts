@@ -1,4 +1,4 @@
-import { prisma } from "../src/server/db";
+import { prisma } from '../src/server/db';
 
 async function main() {
   await prisma.weapon.upsert({
@@ -7,7 +7,7 @@ async function main() {
     },
     create: {
       id: 1,
-      name: 'rock'
+      name: 'rock',
     },
     update: {},
   });
@@ -18,7 +18,7 @@ async function main() {
     },
     create: {
       id: 2,
-      name: 'paper'
+      name: 'paper',
     },
     update: {},
   });
@@ -29,7 +29,7 @@ async function main() {
     },
     create: {
       id: 3,
-      name: 'scissors'
+      name: 'scissors',
     },
     update: {},
   });

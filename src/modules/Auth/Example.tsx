@@ -1,5 +1,5 @@
-import Head from "next/head";
-import Auth from "./Auth";
+import Head from 'next/head';
+import Auth from './Auth';
 const AuthExample = () => (
   <>
     <Head>

@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import Game from "~/layouts/Game";
+import { useRouter } from 'next/router';
+import Game from '~/layouts/Game';
 
 function GamePage() {
   const router = useRouter();
