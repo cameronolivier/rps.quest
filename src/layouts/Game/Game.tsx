@@ -1,5 +1,6 @@
-import Header from "~/components/Header";
+import Heading from "~/components/Heading";
 import PageWrapper from "~/components/PageWrapper";
+import Match from "../../modules/Match";
 
 type Props = {
   id: string;
@@ -7,10 +8,8 @@ type Props = {
 function Game({ id }: Props) {
   return (
     <PageWrapper>
-      <Header>
-        Let&apos;s get playing <br />
-        <strong>Game: {id}</strong>
-      </Header>
+      <Heading>Game: {id}</Heading>
+      <Match />
     </PageWrapper>
   );
 }

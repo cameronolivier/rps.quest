@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Button from "~/components/Button";
 import { api } from "~/utils/api";
-import Header from "../../components/Header";
+import Heading from "../../components/Heading";
 import PageWrapper from "../../components/PageWrapper";
 
 export default function Home() {
@@ -29,7 +29,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageWrapper>
-        <Header>Please create a new game to continue</Header>
+        <Heading>Please create a new game to continue</Heading>
         <Button onClick={handleCreateGame}>Create a new game</Button>
       </PageWrapper>
     </>
