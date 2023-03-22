@@ -1,9 +1,10 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import Button from "~/components/Button";
-import { api } from "~/utils/api";
-import Heading from "../../components/Heading";
-import PageWrapper from "../../components/PageWrapper";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+
+import Button from '~/components/Button';
+import Heading from '~/components/Heading';
+import PageWrapper from '~/components/PageWrapper';
+import { api } from '~/utils/api';
 
 export default function Home() {
   const router = useRouter();
@@ -12,9 +13,10 @@ export default function Home() {
   const handleCreateGame = () => {
     createGame.mutate(undefined, {
       onSuccess: (data) => {
-        console.log("data", data);
+        console.log('data', data);
         void router.push({
-          pathname: "/game/[id]",
+          pathname: '/game/[id]',
+
           query: { id: data.id },
         });
       },

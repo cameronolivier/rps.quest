@@ -15,7 +15,7 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "tailwindcss"],
-  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "plugin:tailwindcss/recommended"],
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "plugin:tailwindcss/recommended", "prettier"],
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn"
   }
