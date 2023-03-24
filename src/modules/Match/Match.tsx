@@ -40,7 +40,11 @@ const getTheWinner = (left: string, right: string) => {
   return 'draw';
 };
 
-const Match = () => {
+type Props = {
+  name?: string;
+};
+
+const Match = ({ name = 'Player 1' }: Props) => {
   const [playerOption, setPlayerOption] = useState<string>();
   const [pcOption, setPcOption] = useState<string>();
   const [winner, setWinner] = useState<string>();
@@ -76,7 +80,7 @@ const Match = () => {
   };
   return (
     <>
-      <h1 className="text-5xl text-lime-500">Choose your weapon!</h1>
+      <h1 className="text-5xl text-lime-500">Choose your weapon, {name}!</h1>
       <div className="flex w-full items-center justify-center">
         <Option name="🤘" onClick={() => handleClick('rock')} />
         <Option name="📄" onClick={() => handleClick('paper')} />
@@ -101,7 +105,7 @@ const Match = () => {
         >
           {winner === 'draw' && `It's a draw!`}
           {winner === 'computer' && `${compName} won!`}
-          {winner === 'you' && `you won!`}
+          {winner === 'you' && `${name || 'you'} won!`}
         </h1>
       )}
     </>
