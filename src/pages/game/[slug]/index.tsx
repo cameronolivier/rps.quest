@@ -3,9 +3,9 @@ import Game from '~/layouts/Game';
 
 function GamePage() {
   const router = useRouter();
-  const id = router.query.id as string;
+  const slug = router.query.slug as string;
 
-  return <Game id={id} />;
+  return <Game slug={slug} />;
 }
 
 export default GamePage;

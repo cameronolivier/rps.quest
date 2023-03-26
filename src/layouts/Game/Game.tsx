@@ -3,12 +3,12 @@ import PageWrapper from '~/components/PageWrapper';
 import AddUser from '../AddUser';
 
 type Props = {
-  id: string;
+  slug: string;
 };
-function Game({ id }: Props) {
+function Game({ slug }: Props) {
   return (
     <PageWrapper>
-      <Heading>Game id: {id}</Heading>
+      <Heading>Game slug: {slug}</Heading>
       <AddUser />
     </PageWrapper>
   );

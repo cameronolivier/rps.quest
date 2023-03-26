@@ -50,33 +50,40 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  gameUser1     Game[]    @relation(name: "User1Games")
-  gameUser2     Game[]    @relation(name: "User2Games")
-  winner        Game[]    @relation(name: "WinnerGames")
+  // gameUser1     Game[]    @relation(name: "User1Games")
+  // gameUser2     Game[]    @relation(name: "User2Games")
+  // winner        Game[]    @relation(name: "WinnerGames")
 }
 
-model Weapon {
-  id              Int    @id @default(autoincrement())
-  name            String @unique
-  gameUser1Weapon Game[] @relation(name: "User1WeaponGames")
-  gameUser2Weapon Game[] @relation(name: "User2WeaponGames")
-}
+// model Weapon {
+//   id              Int    @id @default(autoincrement())
+//   name            String @unique
+//   gameUser1Weapon Game[] @relation(name: "User1WeaponGames")
+//   gameUser2Weapon Game[] @relation(name: "User2WeaponGames")
+// }
 
 model Game {
-  id              String   @id @default(cuid())
-  name            String
-  createdAt       DateTime @default(now())
-  player1Id       String?
-  player1         User?    @relation(name: "User1Games", fields: [player1Id], references: [id])
-  player2Id       String?
-  player2         User?    @relation(name: "User2Games", fields: [player2Id], references: [id])
-  winner          User?    @relation(name: "WinnerGames", fields: [winnerId], references: [id])
-  winnerId        String?
-  player1Weapon   Weapon?  @relation(name: "User1WeaponGames", fields: [player1WeaponId], references: [id])
-  player1WeaponId Int?
-  player2Weapon   Weapon?  @relation(name: "User2WeaponGames", fields: [player2WeaponId], references: [id])
-  player2WeaponId Int?
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  // other fields for the game object
 }
+
+// model Game {
+//   id              String   @id @default(cuid())
+//   createdAt       DateTime @default(now())
+//   slug            String   @unique
+//   player1Id       String?
+//   player1         User?    @relation(name: "User1Games", fields: [player1Id], references: [id])
+//   player2Id       String?
+//   player2         User?    @relation(name: "User2Games", fields: [player2Id], references: [id])
+//   winner          User?    @relation(name: "WinnerGames", fields: [winnerId], references: [id])
+//   winnerId        String?
+//   player1Weapon   Weapon?  @relation(name: "User1WeaponGames", fields: [player1WeaponId], references: [id])
+//   player1WeaponId Int?
+//   player2Weapon   Weapon?  @relation(name: "User2WeaponGames", fields: [player2WeaponId], references: [id])
+//   player2WeaponId Int?
+// }
 
 // model User {
 //   id        String @id @default(cuid())

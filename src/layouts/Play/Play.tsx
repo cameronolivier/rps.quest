@@ -3,13 +3,13 @@ import PageWrapper from '~/components/PageWrapper';
 import Match from '../../modules/Match';
 
 type Props = {
-  id: string;
+  slug: string;
   name: string;
 };
-function Play({ id, name }: Props) {
+function Play({ slug, name }: Props) {
   return (
     <PageWrapper>
-      <Heading>Game: {id}</Heading>
+      <Heading>Game slug: {slug}</Heading>
       <Match name={name} />
     </PageWrapper>
   );

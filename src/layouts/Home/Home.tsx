@@ -15,9 +15,8 @@ export default function Home() {
       onSuccess: (data) => {
         console.log('data', data);
         void router.push({
-          pathname: '/game/[id]',
-
-          query: { id: data.id },
+          pathname: '/game/[slug]',
+          query: { id: data.id, slug: data.slug },
         });
       },
     });

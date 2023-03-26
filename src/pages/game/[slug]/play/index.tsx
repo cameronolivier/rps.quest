@@ -3,9 +3,9 @@ import Play from '~/layouts/Play';
 
 function PlayPage() {
   const router = useRouter();
-  const { id, name } = router.query;
+  const { slug, name } = router.query as { slug: string; name: string };
 
-  return <Play id={id as string} name={name as string} />;
+  return <Play slug={slug} name={name} />;
 }
 
 export default PlayPage;

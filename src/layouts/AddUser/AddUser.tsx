@@ -5,7 +5,7 @@ import { api } from '../../utils/api';
 
 const AddUser = () => {
   const router = useRouter();
-  const id = router.query.id as string;
+  const slug = router.query.slug as string;
   const createUser = api.users.create.useMutation();
   const [name, setName] = useState('');
 
@@ -17,8 +17,8 @@ const AddUser = () => {
         onSuccess: (data) => {
           console.log('data', data);
           void router.push({
-            pathname: '/game/[id]/play',
-            query: { id, name: data.name },
+            pathname: '/game/[slug]/play',
+            query: { slug, name: data.name },
           });
         },
       }
