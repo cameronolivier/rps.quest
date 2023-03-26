@@ -3,8 +3,18 @@ import { useEffect, useMemo, useState } from 'react';
 import { tw } from '../../utils/tailwind';
 import { letTheComputerPlay } from './Match.utils';
 
+const optionEmojiMap = {
+  rock: '🤘',
+  paper: '📄',
+  scissors: '✂️️️',
+};
+
+type Options = keyof typeof optionEmojiMap;
+
+const getOptionEmoji = (option: Options) => optionEmojiMap[option];
+
 type OptionProps = {
-  name: string;
+  name: (typeof optionEmojiMap)[keyof typeof optionEmojiMap];
   onClick: (option: string) => void;
 };
 const Option: FC<OptionProps> = ({ name, onClick }) => {
@@ -18,7 +28,7 @@ const Option: FC<OptionProps> = ({ name, onClick }) => {
   );
 };
 
-const getTheWinner = (left: string, right: string) => {
+const getTheWinner = (left: Options, right: Options) => {
   if (left === 'rock' && right === 'paper') {
     return 'right';
   }
@@ -45,8 +55,8 @@ type Props = {
 };
 
 const Match = ({ name = 'Player 1' }: Props) => {
-  const [playerOption, setPlayerOption] = useState<string>();
-  const [pcOption, setPcOption] = useState<string>();
+  const [playerOption, setPlayerOption] = useState<Options>();
+  const [pcOption, setPcOption] = useState<Options>();
   const [winner, setWinner] = useState<string>();
 
   const compName = useMemo(() => {
@@ -73,7 +83,7 @@ const Match = ({ name = 'Player 1' }: Props) => {
     }
   }, [playerOption, pcOption]);
 
-  const handleClick = (option: string) => {
+  const handleClick = (option: Options) => {
     const pc = letTheComputerPlay();
     setPlayerOption(option);
     setPcOption(pc);
@@ -87,11 +97,13 @@ const Match = ({ name = 'Player 1' }: Props) => {
         <Option name="✂️️️" onClick={() => handleClick('scissors')} />
       </div>
       {!!playerOption && (
-        <h2 className="text-2xl text-amber-500">You selected {playerOption}</h2>
+        <h2 className="text-2xl text-amber-500">
+          You selected {playerOption} {getOptionEmoji(playerOption)}
+        </h2>
       )}
       {!!pcOption && (
         <h2 className="text-2xl text-amber-300">
-          {compName} chose {pcOption}
+          {compName} chose {pcOption} {getOptionEmoji(pcOption)}
         </h2>
       )}
       {!!winner && (
