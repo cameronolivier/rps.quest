@@ -37,7 +37,7 @@ export default function Home() {
       </Head>
       <PageWrapper>
         <Heading>Please create a new game to continue</Heading>
-        <Button onClick={handleCreateGame}>Create a new game</Button>
+        <Button onClick={handleCreateGame}>Let's Play!</Button>
       </PageWrapper>
     </>
   );
