@@ -36,8 +36,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageWrapper>
-        <Heading>Please create a new game to continue</Heading>
-        <Button onClick={handleCreateGame}>Let's Play!</Button>
+        <Heading>{`Let's play Rock Paper Scissors!`}</Heading>
+        <Button onClick={handleCreateGame} disabled={createGame.isLoading}>
+          {createGame.isLoading ? 'Creating game...' : `Create a Game`}
+        </Button>
       </PageWrapper>
     </>
   );
