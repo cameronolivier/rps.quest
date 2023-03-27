@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
+
 import { api } from '../../utils/api';
 
 const AddUser = () => {

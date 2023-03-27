@@ -1,4 +1,5 @@
 import Head from 'next/head';
+
 import Match from '../../modules/Match';
 
 export default function Home() {

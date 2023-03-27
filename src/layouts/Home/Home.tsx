@@ -16,7 +16,7 @@ export default function Home() {
         console.log('data', data);
         void router.push({
           pathname: '/game/[slug]',
-          query: { id: data.id, slug: data.slug },
+          query: { slug: data.slug },
         });
       },
     });

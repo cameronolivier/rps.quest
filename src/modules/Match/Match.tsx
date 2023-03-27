@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { useEffect, useMemo, useState } from 'react';
+
 import { tw } from '../../utils/tailwind';
 import { letTheComputerPlay } from './Match.utils';
 

@@ -1,6 +1,6 @@
+import { gamesRouter } from './routers/games';
 import { usersRouter } from './routers/users';
 import { createTRPCRouter } from './trpc';
-import { gamesRouter } from './routers/games';
 
 /**
  * This is the primary router for your server.

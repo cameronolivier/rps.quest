@@ -1,5 +1,6 @@
 import Heading from '~/components/Heading';
 import PageWrapper from '~/components/PageWrapper';
+
 import AddUser from '../AddUser';
 
 type Props = {
