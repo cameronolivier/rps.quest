@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import type { FC } from 'react';
 import { useEffect, useMemo, useState } from 'react';
+import Button from '../../components/Button';
 
 import { tw } from '../../utils/tailwind';
 import { letTheComputerPlay } from './Match.utils';
@@ -91,12 +93,18 @@ const Match = ({ name = 'Player 1' }: Props) => {
   };
   return (
     <>
-      <h1 className="text-5xl text-lime-500">Choose your weapon, {name}!</h1>
-      <div className="flex w-full items-center justify-center">
-        <Option name="🤘" onClick={() => handleClick('rock')} />
-        <Option name="📄" onClick={() => handleClick('paper')} />
-        <Option name="✂️️️" onClick={() => handleClick('scissors')} />
-      </div>
+      {!winner && (
+        <>
+          <h1 className="text-5xl text-lime-500">
+            Choose your weapon, {name}!
+          </h1>
+          <div className="flex w-full items-center justify-center">
+            <Option name="🤘" onClick={() => handleClick('rock')} />
+            <Option name="📄" onClick={() => handleClick('paper')} />
+            <Option name="✂️️️" onClick={() => handleClick('scissors')} />
+          </div>
+        </>
+      )}
       {!!playerOption && (
         <h2 className="text-2xl text-amber-500">
           You selected {playerOption} {getOptionEmoji(playerOption)}
@@ -108,18 +116,25 @@ const Match = ({ name = 'Player 1' }: Props) => {
         </h2>
       )}
       {!!winner && (
-        <h1
-          className={tw(
-            'text-5xl',
-            winner === 'draw' && 'text-blue-500',
-            winner === 'computer' && 'text-red-500',
-            winner === 'you' && 'text-emerald-500'
-          )}
-        >
-          {winner === 'draw' && `It's a draw!`}
-          {winner === 'computer' && `${compName} won!`}
-          {winner === 'you' && `${name || 'you'} won!`}
-        </h1>
+        <>
+          <h1
+            className={tw(
+              'mt-10 text-5xl',
+              winner === 'draw' && 'text-blue-500',
+              winner === 'computer' && 'text-red-500',
+              winner === 'you' && 'text-emerald-500'
+            )}
+          >
+            {winner === 'draw' && `It's a draw!`}
+            {winner === 'computer' && `${compName} won!`}
+            {winner === 'you' && `${name || 'you'} won!`}
+          </h1>
+          <div className="mt-10">
+            <Button>
+              <Link href={'/'}>Play again</Link>
+            </Button>
+          </div>
+        </>
       )}
     </>
   );
