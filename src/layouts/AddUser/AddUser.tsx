@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 
-import { api } from '../../utils/api';
+import { api } from '~/utils/api';
 
 const AddUser = () => {
   const router = useRouter();
@@ -12,6 +12,7 @@ const AddUser = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
     createUser.mutate(
       { name, slug },
       {
@@ -19,7 +20,7 @@ const AddUser = () => {
           console.log('data', data);
           void router.push({
             pathname: '/game/[slug]/play',
-            query: { slug, name: data.name },
+            query: { slug, name: data.name, userGameId: data.userGameId },
           });
         },
       }

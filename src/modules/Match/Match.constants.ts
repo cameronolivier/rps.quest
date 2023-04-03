@@ -1,7 +1,7 @@
 export const weapons = {
-  rock: 'rock',
-  paper: 'paper',
-  scissors: 'scissors',
+  rock: 'ROCK',
+  paper: 'PAPER',
+  scissors: 'SCISSORS',
 };
 export type Weapons = keyof typeof weapons;
 

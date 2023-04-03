@@ -11,7 +11,7 @@ export const usersRouter = createTRPCRouter({
           name: input.name,
         },
       });
-      await ctx.prisma.userGame.create({
+      const userGame = await ctx.prisma.userGame.create({
         data: {
           user: {
             connect: {
@@ -25,6 +25,10 @@ export const usersRouter = createTRPCRouter({
           },
         },
       });
-      return input;
+      return {
+        name: input.name,
+        slug: input.slug,
+        userGameId: userGame.id,
+      };
     }),
 });

@@ -1,9 +1,13 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
-import Button from '~/components/Button';
+import toast from 'react-hot-toast';
 
+import Button from '~/components/Button';
+import { api } from '~/utils/api';
 import { tw } from '~/utils/tailwind';
-import { opponentNamesMap, type Weapons } from './Match.constants';
+
+import { opponentNamesMap, weapons, type Weapons } from './Match.constants';
 import {
   getOptionEmoji,
   getResultMessage,
@@ -17,8 +21,11 @@ type Props = {
 };
 
 const Match = ({ name = 'Player 1' }: Props) => {
+  const router = useRouter();
+  const { slug, userGameId } = router.query;
   const [playerWeapon, setPlayerWeapon] = useState<Weapons>();
   const [opponentWeapon, setOpponentWeapon] = useState<Weapons>();
+  const updateUserGame = api.userGames.update.useMutation();
 
   const opponentName = opponentWeapon ? opponentNamesMap[opponentWeapon] : '';
 
@@ -36,10 +43,28 @@ const Match = ({ name = 'Player 1' }: Props) => {
     return undefined;
   }, [playerWeapon, opponentWeapon]);
 
-  const handleClick = (option: Weapons) => {
+  const handleClick = (weapon: Weapons) => {
     const computerWeapon = letTheComputerPlay();
-    setPlayerWeapon(option);
+    setPlayerWeapon(weapon);
     setOpponentWeapon(computerWeapon);
+
+    updateUserGame.mutate(
+      {
+        userGameId,
+        weapon,
+      },
+
+      {
+        onError: (error) => {
+          const errorMessage = error.data?.zodError?.fieldErrors?.weapon?.[0];
+          if (errorMessage) {
+            toast.error(errorMessage);
+          } else {
+            toast.error('an error occurred');
+          }
+        },
+      }
+    );
   };
 
   return (
@@ -50,9 +75,15 @@ const Match = ({ name = 'Player 1' }: Props) => {
             Choose your weapon, {name}!
           </h1>
           <div className="flex w-full items-center justify-center">
-            <WeaponSelect name="🤘" onClick={() => handleClick('rock')} />
-            <WeaponSelect name="📄" onClick={() => handleClick('paper')} />
-            <WeaponSelect name="✂️️️" onClick={() => handleClick('scissors')} />
+            <WeaponSelect name="🤘" onClick={() => handleClick(weapons.rock)} />
+            <WeaponSelect
+              name="📄"
+              onClick={() => handleClick(weapons.paper)}
+            />
+            <WeaponSelect
+              name="✂️️️"
+              onClick={() => handleClick(weapons.scissors)}
+            />
           </div>
         </>
       )}

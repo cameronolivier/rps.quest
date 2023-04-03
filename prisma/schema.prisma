@@ -33,6 +33,7 @@ model UserGame {
   gameId  String
   user    User   @relation(fields: [userId], references: [id])
   game    Game   @relation(fields: [gameId], references: [id])
+  weapon  Weapons?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   @@index([gameId])
@@ -40,7 +41,7 @@ model UserGame {
   @@unique([userId, gameId])
 }
 
-enum WEAPONS {
+enum Weapons {
   ROCK
   PAPER
   SCISSORS
