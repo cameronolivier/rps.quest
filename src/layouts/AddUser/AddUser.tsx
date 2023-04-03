@@ -13,7 +13,7 @@ const AddUser = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     createUser.mutate(
-      { name },
+      { name, slug },
       {
         onSuccess: (data) => {
           console.log('data', data);
