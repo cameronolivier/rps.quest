@@ -22,7 +22,7 @@ type Props = {
 
 const Match = ({ name = 'Player 1' }: Props) => {
   const router = useRouter();
-  const { slug, userGameId } = router.query;
+  const userGameId = router.query.userGameId as string;
   const [playerWeapon, setPlayerWeapon] = useState<Weapons>();
   const [opponentWeapon, setOpponentWeapon] = useState<Weapons>();
   const updateUserGame = api.userGames.update.useMutation();
