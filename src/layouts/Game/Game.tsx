@@ -4,14 +4,14 @@ import AddUser from '~/modules/AddUser';
 
 type Props = {
   slug: string;
+  onUserCreate: (name: string) => void;
+  isLoading: boolean;
 };
-function Game({ slug }: Props) {
+export default function Game({ slug, onUserCreate, isLoading }: Props) {
   return (
     <PageWrapper>
       <Heading>Game slug: {slug}</Heading>
-      <AddUser slug={slug} />
+      <AddUser onUserCreate={onUserCreate} isLoading={isLoading} />
     </PageWrapper>
   );
 }
-
-export default Game;

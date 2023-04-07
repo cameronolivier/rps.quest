@@ -1,25 +1,18 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 import Button from '~/components/Button';
 import Heading from '~/components/Heading';
 import PageWrapper from '~/components/PageWrapper';
 import { api } from '~/utils/api.utils';
 
-export default function Home() {
-  const router = useRouter();
+type Props = {
+  onCreateGame: () => void;
+};
+export default function Home({ onCreateGame }: Props) {
   const createGame = api.games.create.useMutation();
 
   const handleCreateGame = () => {
-    createGame.mutate(undefined, {
-      onSuccess: (data) => {
-        console.log('data', data);
-        void router.push({
-          pathname: '/game/[slug]',
-          query: { slug: data.slug },
-        });
-      },
-    });
+    onCreateGame();
   };
 
   return (

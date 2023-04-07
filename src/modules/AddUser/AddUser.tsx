@@ -1,32 +1,16 @@
-import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 
-import { api } from '~/utils/api.utils';
-
 type Props = {
-  slug: string;
+  onUserCreate: (name: string) => void;
+  isLoading: boolean;
 };
-const AddUser = ({ slug }: Props) => {
-  const router = useRouter();
-  const createUser = api.users.create.useMutation();
+const AddUser = ({ onUserCreate, isLoading }: Props) => {
   const [name, setName] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    createUser.mutate(
-      { name, slug },
-      {
-        onSuccess: (data) => {
-          console.log('data', data);
-          void router.push({
-            pathname: '/game/[slug]/play',
-            query: { slug, name: data.name, userGameId: data.userGameId },
-          });
-        },
-      }
-    );
+    onUserCreate(name);
   };
 
   return (
@@ -50,10 +34,10 @@ const AddUser = ({ slug }: Props) => {
         <div className="flex justify-end">
           <button
             type="submit"
-            disabled={createUser.isLoading}
+            disabled={isLoading}
             className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
           >
-            {createUser.isLoading ? 'Adding user...' : 'Add User'}
+            {isLoading ? 'Adding user...' : 'Add User'}
           </button>
         </div>
       </form>
