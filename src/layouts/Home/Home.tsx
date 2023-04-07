@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Button from '~/components/Button';
 import Heading from '~/components/Heading';
 import PageWrapper from '~/components/PageWrapper';
-import { api } from '~/utils/api';
+import { api } from '~/utils/api.utils';
 
 export default function Home() {
   const router = useRouter();

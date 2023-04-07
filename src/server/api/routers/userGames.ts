@@ -1,11 +1,11 @@
-import { type Prisma } from '@prisma/client';
+import { type Weapons } from '@prisma/client';
 import { z } from 'zod';
 
 import { createTRPCRouter, publicProcedure } from '../trpc';
 
 const schema = z.object({
   userGameId: z.string(),
-  weapon: z.enum(['ROCK', 'PAPER', 'SCISSORS']),
+  weapon: z.custom<Weapons>(),
 });
 export const userGamesRouter = createTRPCRouter({
   update: publicProcedure.input(schema).mutation(async ({ ctx, input }) => {
@@ -14,7 +14,7 @@ export const userGamesRouter = createTRPCRouter({
         id: input.userGameId,
       },
       data: {
-        weapon: input.weapon as Prisma.UserGameUpdateInput['weapon'],
+        weapon: input.weapon as Weapons,
       },
     });
   }),

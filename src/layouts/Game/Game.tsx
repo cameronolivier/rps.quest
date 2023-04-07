@@ -1,7 +1,7 @@
 import Heading from '~/components/Heading';
 import PageWrapper from '~/components/PageWrapper';
 
-import AddUser from '../AddUser';
+import AddUser from '../../modules/AddUser';
 
 type Props = {
   slug: string;

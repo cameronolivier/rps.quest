@@ -25,6 +25,7 @@ model Game {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   players   UserGame[]
+  @@index([slug])
 }
 
 model UserGame {
@@ -34,6 +35,7 @@ model UserGame {
   user    User   @relation(fields: [userId], references: [id])
   game    Game   @relation(fields: [gameId], references: [id])
   weapon  Weapons?
+  status  Status?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   @@index([gameId])
@@ -41,6 +43,11 @@ model UserGame {
   @@unique([userId, gameId])
 }
 
+enum Status {
+  WIN
+  LOSE
+  DRAW
+}
 enum Weapons {
   ROCK
   PAPER

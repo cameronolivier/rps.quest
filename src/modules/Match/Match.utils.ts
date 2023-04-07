@@ -1,52 +1,55 @@
-import { weaponEmojiMap, type Weapons } from './Match.constants';
+import {
+  resultStatus,
+  weaponEmojiMap,
+  weapons,
+  type ResultStatus,
+  type Weapons,
+} from './Match.constants';
 
 export const letTheComputerPlay = (): Weapons => {
   const compThrow = Math.floor(Math.random() * 100);
   if (compThrow < 33) {
-    return 'rock';
+    return weapons.rock;
   }
   if (compThrow < 66) {
-    return 'paper';
+    return weapons.paper;
   }
-  return 'scissors';
+  return weapons.scissors;
 };
 
 export const getOptionEmoji = (weapon: Weapons) => weaponEmojiMap[weapon];
 
-export const getTheWinner = (
-  left: Weapons,
-  right: Weapons
-): 'left' | 'right' | 'none' => {
-  if (left === 'rock' && right === 'paper') {
-    return 'right';
+export const getTheWinner = (opponent: Weapons, you: Weapons): ResultStatus => {
+  if (opponent === weapons.rock && you === weapons.paper) {
+    return resultStatus.win;
   }
-  if (left === 'rock' && right === 'scissors') {
-    return 'left';
+  if (opponent === weapons.rock && you === weapons.scissors) {
+    return resultStatus.lose;
   }
-  if (left === 'paper' && right === 'rock') {
-    return 'left';
+  if (opponent === weapons.paper && you === weapons.rock) {
+    return resultStatus.lose;
   }
-  if (left === 'paper' && right === 'scissors') {
-    return 'right';
+  if (opponent === weapons.paper && you === weapons.scissors) {
+    return resultStatus.win;
   }
-  if (left === 'scissors' && right === 'rock') {
-    return 'right';
+  if (opponent === weapons.scissors && you === weapons.rock) {
+    return resultStatus.win;
   }
-  if (left === 'scissors' && right === 'paper') {
-    return 'left';
+  if (opponent === weapons.scissors && you === weapons.paper) {
+    return resultStatus.lose;
   }
-  return 'none';
+  return resultStatus.draw;
 };
 
 export const getResultMessage = (
-  result: 'draw' | 'opponent' | 'you',
+  result: ResultStatus,
   name: string | undefined,
   opponent: string
 ) => {
-  if (result === 'opponent') {
+  if (result === resultStatus.lose) {
     return `${opponent} won!`;
   }
-  if (result === 'you') {
+  if (result === resultStatus.win) {
     return `${name || 'you'} won!`;
   }
   return `It's a draw!`;
