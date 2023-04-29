@@ -8,6 +8,13 @@ const schema = z.object({
   weapon: z.custom<Weapons>(),
 });
 export const userGamesRouter = createTRPCRouter({
+  getGameUsers: publicProcedure.query(async ({ ctx, input }) => {
+    return await ctx.prisma.userGame.findUnique({
+      where: {
+        game: input.gameId,
+      },
+    });
+  }),
   update: publicProcedure.input(schema).mutation(async ({ ctx, input }) => {
     return await ctx.prisma.userGame.update({
       where: {

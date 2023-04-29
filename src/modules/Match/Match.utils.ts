@@ -1,9 +1,10 @@
+import { type Weapons } from '@prisma/client';
+
 import {
   resultStatus,
   weaponEmojiMap,
   weapons,
   type ResultStatus,
-  type Weapons,
 } from './Match.constants';
 
 export const letTheComputerPlay = (): Weapons => {
