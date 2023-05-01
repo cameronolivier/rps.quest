@@ -26,7 +26,7 @@ export const usersRouter = createTRPCRouter({
         },
       });
       return {
-        name: input.name,
+        userId: user.id,
         slug: input.slug,
         userGameId: userGame.id,
       };

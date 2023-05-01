@@ -2,22 +2,25 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-import { PlayComputer } from '~/layouts/Play';
+import Button from '~/components/Button';
+import Heading from '~/components/Heading';
+import PageWrapper from '~/components/PageWrapper';
+import Play, { PlayComputer } from '~/layouts/Play';
 import { type Weapons } from '~/modules/Match/Match.constants';
 import { api } from '~/utils/api.utils';
 
-import Button from '../../../../components/Button';
-import Heading from '../../../../components/Heading';
-import PageWrapper from '../../../../components/PageWrapper';
-
 export default function PlayPage() {
   const router = useRouter();
-  const { slug, name, userGameId } = router.query as {
+  const { slug, userId, userGameId } = router.query as {
     slug: string;
-    name: string;
+    userId: string;
     userGameId: string;
   };
   const [isComputer, setIsComputer] = useState<boolean>();
+  const { data } = api.userGames.getGameUsers.useQuery({
+    userGameId,
+    playerId: userId,
+  });
 
   const updateUserGame = api.userGames.update.useMutation();
   const handleWeaponSelect = (weapon: Weapons) => {
@@ -50,17 +53,22 @@ export default function PlayPage() {
 
   return (
     <>
-      {isComputer && (
+      {isComputer && data?.player && (
         <PlayComputer
           slug={slug}
-          name={name}
+          name={data.player.name || 'Player 1'}
           handleWeaponSelect={handleWeaponSelect}
         />
       )}
-      {!isComputer && (
-        <PlayComputer
+      {!isComputer && data?.player && (
+        <Play
           slug={slug}
-          name={name}
+          player={{
+            name: data.player.name || 'Player 1',
+            weapon:
+              data.player.weapon ?? (updateUserGame.data?.weapon || undefined),
+          }}
+          opponent={data.opponent}
           handleWeaponSelect={handleWeaponSelect}
         />
       )}

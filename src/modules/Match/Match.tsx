@@ -43,7 +43,7 @@ export default function Match({ onWeaponSelect, opponent, player }: Props) {
           You selected {player.weapon} {getOptionEmoji(player.weapon)}
         </h2>
       )}
-      {!!opponent?.weapon && (
+      {!!opponent?.weapon && !!player.weapon && (
         <h2 className="text-2xl text-amber-300">
           {opponent.name} chose {opponent.weapon}{' '}
           {getOptionEmoji(opponent.weapon)}

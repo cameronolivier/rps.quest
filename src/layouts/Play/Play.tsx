@@ -7,7 +7,7 @@ import { type Weapons } from '~/modules/Match/Match.constants';
 type Props = {
   slug: string;
   player: Player;
-  opponent: Player;
+  opponent?: Player;
   handleWeaponSelect: (weapon: Weapons) => void;
 };
 export default function Play({

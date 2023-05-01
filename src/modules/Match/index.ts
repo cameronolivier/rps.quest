@@ -1,2 +1,2 @@
 export { default } from './Match';
-export { default as AiMatch, ComputerMatch } from './AiMatch';
+export { default as ComputerMatch } from './ComputerMatch';

@@ -15,7 +15,7 @@ export default function GamePage() {
           console.log('data', data);
           void router.push({
             pathname: '/game/[slug]/play',
-            query: { slug, name: data.name, userGameId: data.userGameId },
+            query: { slug, userId: data.userId, userGameId: data.userGameId },
           });
         },
       }
