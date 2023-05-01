@@ -4,7 +4,7 @@ const config = {
   theme: {
     extend: {},
   },
-  plugins: [require("tailwindcss-animate")],
+  plugin: [],
 };
 
 module.exports = config;
