@@ -5,23 +5,26 @@ import ChooseYourWeapon from './ChooseYourWeapon';
 import { getOptionEmoji, getTheWinner } from './Match.utils';
 import Result from './Result';
 
-export type Player = {
+export type PlayerName = {
   name: string;
+};
+export type Player = PlayerName & {
   weapon?: Weapons;
 };
+
 type Props = {
   onWeaponSelect: (weapon: Weapons) => void;
-  opponent: Player;
+  opponent?: Player;
   player: Player;
 };
 export default function Match({ onWeaponSelect, opponent, player }: Props) {
   const result = useMemo(() => {
-    if (!(player.weapon && opponent.weapon)) {
+    if (!(player.weapon && opponent?.weapon)) {
       return undefined;
     }
 
     return getTheWinner(opponent.weapon, player.weapon);
-  }, [player.weapon, opponent.weapon]);
+  }, [player.weapon, opponent?.weapon]);
 
   const handleWeaponSelect = (weapon: Weapons) => {
     onWeaponSelect(weapon);
@@ -40,16 +43,16 @@ export default function Match({ onWeaponSelect, opponent, player }: Props) {
           You selected {player.weapon} {getOptionEmoji(player.weapon)}
         </h2>
       )}
-      {!!opponent.weapon && (
+      {!!opponent?.weapon && (
         <h2 className="text-2xl text-amber-300">
           {opponent.name} chose {opponent.weapon}{' '}
           {getOptionEmoji(opponent.weapon)}
         </h2>
       )}
-      {!!result && (
+      {!!result && opponent?.name && (
         <Result
           status={result}
-          opponentName={opponent.name}
+          opponentName={opponent?.name}
           name={player.name}
         />
       )}

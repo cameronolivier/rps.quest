@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import ChooseYourWeapon from './ChooseYourWeapon';
+import Match, { type Player } from './Match';
 import { aiNamesMap, type Weapons } from './Match.constants';
 import {
   getOptionEmoji,
@@ -58,3 +59,26 @@ const AiMatch = ({ onWeaponSelect, name = 'Player 1' }: Props) => {
 };
 
 export default AiMatch;
+
+export const ComputerMatch = ({ onWeaponSelect, name = 'Player 1' }: Props) => {
+  const [opponent, setOpponent] = useState<Player>();
+  const [playerWeapon, setPlayerWeapon] = useState<Weapons>();
+
+  const player: Player = { name, weapon: playerWeapon };
+
+  const handleWeaponSelect = (weapon: Weapons) => {
+    const aiWeapon = letTheComputerPlay();
+    const aiName = aiWeapon ? aiNamesMap[aiWeapon] || '' : '';
+    setPlayerWeapon(weapon);
+    setOpponent({ name: aiName, weapon: aiWeapon });
+    onWeaponSelect(weapon);
+  };
+
+  return (
+    <Match
+      onWeaponSelect={handleWeaponSelect}
+      opponent={opponent}
+      player={player}
+    />
+  );
+};
