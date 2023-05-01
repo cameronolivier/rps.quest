@@ -8,6 +8,7 @@ import PageWrapper from '~/components/PageWrapper';
 import Play, { PlayComputer } from '~/layouts/Play';
 import { type Weapons } from '~/modules/Match/Match.constants';
 import { api } from '~/utils/api.utils';
+import { tw } from '~/utils/tailwind.utils';
 
 export default function PlayPage() {
   const router = useRouter();
@@ -39,11 +40,11 @@ export default function PlayPage() {
     );
   };
 
-  if (isComputer === undefined) {
+  if (isComputer === undefined && data?.player.weapon === undefined) {
     return (
       <PageWrapper>
         <Heading>Select a game mode</Heading>
-        <div className="flex w-1/2 flex-row justify-center space-x-2">
+        <div className={tw('flex w-1/2 flex-row justify-center space-x-2')}>
           <Button onClick={() => setIsComputer(true)}>vs computer</Button>
           <Button onClick={() => setIsComputer(false)}>2 player</Button>
         </div>
@@ -62,7 +63,6 @@ export default function PlayPage() {
       )}
       {!isComputer && data?.player && (
         <Play
-          slug={slug}
           player={{
             name: data.player.name || 'Player 1',
             weapon:

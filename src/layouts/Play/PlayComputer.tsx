@@ -10,9 +10,9 @@ type Props = {
 };
 export default function Play({ slug, name, handleWeaponSelect }: Props) {
   return (
-    <PageWrapper>
+    <>
       <Heading>Game slug: {slug}</Heading>
       <ComputerMatch name={name} onWeaponSelect={handleWeaponSelect} />
-    </PageWrapper>
+    </>
   );
 }

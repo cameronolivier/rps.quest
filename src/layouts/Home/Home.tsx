@@ -2,21 +2,20 @@ import Head from 'next/head';
 
 import Button from '~/components/Button';
 import Heading from '~/components/Heading';
-import PageWrapper from '~/components/PageWrapper';
-import { api } from '~/utils/api.utils';
+
+import { tw } from '../../utils/tailwind.utils';
 
 type Props = {
   onCreateGame: () => void;
+  isCreatingGame: boolean;
 };
-export default function Home({ onCreateGame }: Props) {
-  const createGame = api.games.create.useMutation();
-
+export default function Home({ onCreateGame, isCreatingGame }: Props) {
   const handleCreateGame = () => {
     onCreateGame();
   };
 
   return (
-    <>
+    <div className={tw('flex flex-col items-center')}>
       <Head>
         <title>
           Rock Paper Scissors Tournament. May your rocks be hard and your paper
@@ -28,12 +27,10 @@ export default function Home({ onCreateGame }: Props) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageWrapper>
-        <Heading>{`Let's play Rock Paper Scissors!`}</Heading>
-        <Button onClick={handleCreateGame} disabled={createGame.isLoading}>
-          {createGame.isLoading ? 'Creating game...' : `Create a Game`}
-        </Button>
-      </PageWrapper>
-    </>
+      <Heading>{`Let's play Rock Paper Scissors!`}</Heading>
+      <Button onClick={handleCreateGame} disabled={isCreatingGame}>
+        {isCreatingGame ? 'Creating game...' : `Create a Game`}
+      </Button>
+    </div>
   );
 }
