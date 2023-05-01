@@ -13,11 +13,13 @@ type Props = {
   isLoading: boolean;
 };
 export default function Game({ slug, onUserCreate, isLoading }: Props) {
-  const [url, setUrl] = useState();
+  const [url, setUrl] = useState('No URL available');
 
   useEffect(() => {
-    const gameUrl = getAbsoluteUrl() || 'No URL available';
-    setUrl(gameUrl);
+    const gameUrl = getAbsoluteUrl();
+    if (gameUrl) {
+      setUrl(gameUrl);
+    }
   }, []);
   const handleCopy = () => {
     navigator.clipboard
