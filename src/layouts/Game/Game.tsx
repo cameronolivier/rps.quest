@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 import Heading from '~/components/Heading';
 import PageWrapper from '~/components/PageWrapper';
 import AddUser from '~/modules/AddUser';
+
+import { getAbsoluteUrl } from '../../utils/vercel.utils';
 
 type Props = {
   slug: string;
@@ -10,7 +13,12 @@ type Props = {
   isLoading: boolean;
 };
 export default function Game({ slug, onUserCreate, isLoading }: Props) {
-  const url = `http://localhost:3000/game/${slug}`;
+  const [url, setUrl] = useState();
+
+  useEffect(() => {
+    const gameUrl = getAbsoluteUrl() || 'No URL available';
+    setUrl(gameUrl);
+  }, []);
   const handleCopy = () => {
     navigator.clipboard
       .writeText(url)
