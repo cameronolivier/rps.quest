@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { Weapons, aiNamesMap } from './Match.constants';
+import { aiNamesMap } from './Match.constants';
+import type { Weapons } from './Match.constants';
 import { letTheComputerPlay } from './Match.utils';
 
 export const useAiOpponent = () => {
@@ -8,7 +9,7 @@ export const useAiOpponent = () => {
 
   const aiName = useMemo(
     () => (aiWeapon ? aiNamesMap[aiWeapon] || '' : ''),
-    []
+    [aiWeapon]
   );
 
   const aiFight = useCallback(() => {

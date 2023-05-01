@@ -12,8 +12,7 @@ type Props = {
 export default function Game({ slug, onUserCreate, isLoading }: Props) {
   const url = `http://localhost:3000/game/${slug}`;
   const handleCopy = () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    navigator.clipboard.writeText(url).then(() => {
+    void navigator.clipboard.writeText(url).then(() => {
       toast.success('Copied to clipboard!');
     });
   };
