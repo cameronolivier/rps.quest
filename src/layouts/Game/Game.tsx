@@ -12,9 +12,14 @@ type Props = {
 export default function Game({ slug, onUserCreate, isLoading }: Props) {
   const url = `http://localhost:3000/game/${slug}`;
   const handleCopy = () => {
-    void navigator.clipboard.writeText(url).then(() => {
-      toast.success('Copied to clipboard!');
-    });
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        toast.success('Copied to clipboard!');
+      })
+      .catch(() => {
+        toast.error('Failed to copy to the clipboard!');
+      });
   };
   return (
     <PageWrapper>
