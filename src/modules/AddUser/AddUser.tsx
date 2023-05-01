@@ -31,14 +31,14 @@ const AddUser = ({ onUserCreate, isLoading }: Props) => {
             id="name"
             name="name"
             className="w-full rounded-md border border-violet-900 p-2 focus:border-violet-400 focus:outline-none"
-            placeholder="Enter your name"
+            placeholder="Enter your nickname"
             onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
         <div className="flex justify-end">
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? 'Adding user...' : 'Add User'}
+            {isLoading ? 'Adding you to the game...' : "Let's go!"}
           </Button>
         </div>
       </form>

@@ -1,5 +1,4 @@
 import Heading from '~/components/Heading';
-import PageWrapper from '~/components/PageWrapper';
 import Match from '~/modules/Match';
 import { type Player } from '~/modules/Match/Match';
 import { type Weapons } from '~/modules/Match/Match.constants';

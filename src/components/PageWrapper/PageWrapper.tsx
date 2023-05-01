@@ -14,11 +14,11 @@ function PageWrapper({ children }: Props) {
     >
       <header
         className={tw(
-          'flex justify-center p-1 text-xl font-extrabold text-violet-800'
+          'mr-2 flex justify-center self-end p-1 text-xl font-light text-violet-500'
         )}
       >
-        {'rps | '}
-        <span className={tw('text-violet-900')}>&nbsp;quest</span>
+        {'rps.'}
+        <span className={tw('text-violet-600')}>quest</span>
       </header>
       <article
         className={tw(`flex flex-1 flex-col items-center justify-center`)}

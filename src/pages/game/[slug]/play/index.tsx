@@ -4,7 +4,6 @@ import toast from 'react-hot-toast';
 
 import Button from '~/components/Button';
 import Heading from '~/components/Heading';
-import PageWrapper from '~/components/PageWrapper';
 import Play, { PlayComputer } from '~/layouts/Play';
 import { type Weapons } from '~/modules/Match/Match.constants';
 import { api } from '~/utils/api.utils';
@@ -40,15 +39,18 @@ export default function PlayPage() {
     );
   };
 
-  if (isComputer === undefined && data?.player.weapon === undefined) {
+  if (isComputer === undefined && !data?.player.weapon) {
     return (
-      <PageWrapper>
+      <>
         <Heading>Select a game mode</Heading>
-        <div className={tw('flex w-1/2 flex-row justify-center space-x-2')}>
-          <Button onClick={() => setIsComputer(true)}>vs computer</Button>
-          <Button onClick={() => setIsComputer(false)}>2 player</Button>
+        <div
+          className={tw('mt-2 flex w-1/2 flex-col justify-center space-x-2')}
+        >
+          <Button onClick={() => setIsComputer(false)}>2 Player Mode</Button>
+          <p className={tw('my-3 text-center text-violet-400')}>OR</p>
+          <Button onClick={() => setIsComputer(true)}>vs Math.random()</Button>
         </div>
-      </PageWrapper>
+      </>
     );
   }
 

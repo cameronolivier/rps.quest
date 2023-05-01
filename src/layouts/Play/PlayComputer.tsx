@@ -1,5 +1,4 @@
 import Heading from '~/components/Heading';
-import PageWrapper from '~/components/PageWrapper';
 import { ComputerMatch } from '~/modules/Match';
 import { type Weapons } from '~/modules/Match/Match.constants';
 
