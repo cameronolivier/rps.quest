@@ -6,10 +6,15 @@ import { letTheComputerPlay } from './Match.utils';
 
 type Props = {
   onWeaponSelect: (weapon: Weapons) => void;
+  onSetOpponent: (opponent: string) => void;
   name?: string;
 };
 
-const ComputerMatch = ({ onWeaponSelect, name = 'Player 1' }: Props) => {
+const ComputerMatch = ({
+  onWeaponSelect,
+  onSetOpponent,
+  name = 'Player 1',
+}: Props) => {
   const [opponent, setOpponent] = useState<Player>();
   const [playerWeapon, setPlayerWeapon] = useState<Weapons>();
 
@@ -21,6 +26,7 @@ const ComputerMatch = ({ onWeaponSelect, name = 'Player 1' }: Props) => {
     setPlayerWeapon(weapon);
     setOpponent({ name: aiName, weapon: aiWeapon });
     onWeaponSelect(weapon);
+    onSetOpponent(aiName);
   };
 
   return (
