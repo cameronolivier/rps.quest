@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { type ReactNode } from 'react';
 
 import { tw } from '../../utils/tailwind.utils';
@@ -17,8 +18,10 @@ function PageWrapper({ children }: Props) {
           'mr-2 flex justify-center self-end p-1 text-xl font-light text-violet-500'
         )}
       >
-        {'rps.'}
-        <span className={tw('text-violet-600')}>quest</span>
+        <Link href="/" title="go home">
+          rps.
+          <span className={tw('text-violet-600')}>quest</span>
+        </Link>
       </header>
       <article
         className={tw(`flex flex-1 flex-col items-center justify-center`)}
