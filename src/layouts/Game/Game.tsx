@@ -4,16 +4,14 @@ import toast from 'react-hot-toast';
 
 import Heading from '~/components/Heading';
 import AddUser from '~/modules/AddUser';
-
-import { tw } from '../../utils/tailwind.utils';
-import { getAbsoluteUrl } from '../../utils/vercel.utils';
+import { tw } from '~/utils/tailwind.utils';
+import { getAbsoluteUrl } from '~/utils/vercel.utils';
 
 type Props = {
-  slug: string;
   onUserCreate: (name: string) => void;
   isLoading: boolean;
 };
-export default function Game({ slug, onUserCreate, isLoading }: Props) {
+export default function Game({ onUserCreate, isLoading }: Props) {
   const [url, setUrl] = useState('No URL available');
 
   useEffect(() => {
@@ -44,7 +42,7 @@ export default function Game({ slug, onUserCreate, isLoading }: Props) {
       >
         <span
           className={tw(
-            'block rounded border-r border-violet-500 bg-violet-800 py-3 px-2 text-sm' +
+            'block rounded border-r border-violet-500 bg-violet-800 px-2 py-3 text-sm' +
               ' text-violet-400'
           )}
         >
@@ -52,13 +50,13 @@ export default function Game({ slug, onUserCreate, isLoading }: Props) {
         </span>
         <span
           className={tw(
-            'block rounded bg-violet-800 py-3 px-5 text-sm text-violet-400'
+            'block rounded bg-violet-800 px-5 py-3 text-sm text-violet-400'
           )}
         >
           <Share />
         </span>
       </button>
-      <p className={tw('mt-2 mb-10 text-violet-400')}>
+      <p className={tw('mb-10 mt-2 text-violet-400')}>
         If you want to play with another player copy and share the game url
         above.
       </p>

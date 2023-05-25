@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 import Game from '~/layouts/Game';
 import { api } from '~/utils/api.utils';
@@ -18,14 +19,14 @@ export default function GamePage() {
             query: { slug, userId: data.userId, userGameId: data.userGameId },
           });
         },
+        onError: (error) => {
+          console.log('error', { error });
+          toast.error(
+            error?.shape?.message || 'There was an error creating your user'
+          );
+        },
       }
     );
   };
-  return (
-    <Game
-      slug={slug}
-      isLoading={createUser.isLoading}
-      onUserCreate={onUserCreate}
-    />
-  );
+  return <Game isLoading={createUser.isLoading} onUserCreate={onUserCreate} />;
 }
