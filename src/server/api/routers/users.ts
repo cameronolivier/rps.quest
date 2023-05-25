@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 import { createTRPCRouter, publicProcedure } from '../trpc';
@@ -11,6 +12,19 @@ export const usersRouter = createTRPCRouter({
           name: input.name,
         },
       });
+
+      const game = await ctx.prisma.game.findUnique({
+        where: {
+          slug: input.slug,
+        },
+      });
+      if (game && game.players.length > 2) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'Game is full',
+        });
+      }
+
       const userGame = await ctx.prisma.userGame.create({
         data: {
           user: {

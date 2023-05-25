@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
 /** @type {import("eslint").Linter.Config} */
@@ -18,7 +17,7 @@ const config = {
   parserOptions: {
     project: path.join(__dirname, 'tsconfig.json'),
   },
-  plugins: ['@typescript-eslint', 'tailwindcss'],
+  plugins: ['@typescript-eslint', 'tailwindcss', '@ts-safeql/eslint-plugin'],
   extends: [
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended',
