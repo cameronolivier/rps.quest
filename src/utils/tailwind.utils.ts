@@ -3,3 +3,7 @@ import type { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export const tw = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
+
+export const cls = (classes: Record<string, string>) => {
+  return tw(Object.values(classes));
+};

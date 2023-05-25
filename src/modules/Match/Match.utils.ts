@@ -1,9 +1,10 @@
+import { type Weapons } from '@prisma/client';
+
 import {
   resultStatus,
   weaponEmojiMap,
   weapons,
   type ResultStatus,
-  type Weapons,
 } from './Match.constants';
 
 export const letTheComputerPlay = (): Weapons => {
@@ -47,10 +48,10 @@ export const getResultMessage = (
   opponent: string
 ) => {
   if (result === resultStatus.lose) {
-    return `${opponent} won!`;
+    return `${opponent} won. You lost 😢.`;
   }
   if (result === resultStatus.win) {
-    return `${name || 'you'} won!`;
+    return `${'You' || name} won!`;
   }
   return `It's a draw!`;
 };

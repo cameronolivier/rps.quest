@@ -6,11 +6,10 @@ import { api } from '~/utils/api.utils';
 export default function HomePage() {
   const router = useRouter();
 
-  const createGame = api.games.create.useMutation();
+  const { mutate, isLoading } = api.games.create.useMutation();
   const handleCreateGame = () => {
-    createGame.mutate(undefined, {
+    mutate(undefined, {
       onSuccess: (data) => {
-        console.log('data', data);
         void router.push({
           pathname: '/game/[slug]',
           query: { slug: data.slug },
@@ -18,5 +17,5 @@ export default function HomePage() {
       },
     });
   };
-  return <Home onCreateGame={handleCreateGame} />;
+  return <Home onCreateGame={handleCreateGame} isCreatingGame={isLoading} />;
 }

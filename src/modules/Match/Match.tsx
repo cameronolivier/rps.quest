@@ -1,64 +1,61 @@
-import { useMemo, useState } from 'react';
+import { type Weapons } from '@prisma/client';
+import { useMemo } from 'react';
 
 import ChooseYourWeapon from './ChooseYourWeapon';
-import { opponentNamesMap, type Weapons } from './Match.constants';
-import {
-  getOptionEmoji,
-  getTheWinner,
-  letTheComputerPlay,
-} from './Match.utils';
+import { getOptionEmoji, getTheWinner } from './Match.utils';
 import Result from './Result';
+
+export type PlayerName = {
+  name: string;
+};
+export type Player = PlayerName & {
+  weapon?: Weapons;
+};
 
 type Props = {
   onWeaponSelect: (weapon: Weapons) => void;
-  name?: string;
+  opponent?: Player;
+  player: Player;
 };
-const Match = ({ onWeaponSelect, name = 'Player 1' }: Props) => {
-  const [playerWeapon, setPlayerWeapon] = useState<Weapons>();
-  const [opponentWeapon, setOpponentWeapon] = useState<Weapons>();
-
-  const opponentName = opponentWeapon
-    ? opponentNamesMap[opponentWeapon] || ''
-    : '';
-
-  const hasPlayerPlayed = !!playerWeapon;
-  const hasOpponentPlayed = !!opponentWeapon;
-
+export default function Match({ onWeaponSelect, opponent, player }: Props) {
   const result = useMemo(() => {
-    if (!(playerWeapon && opponentWeapon)) {
+    if (!(player.weapon && opponent?.weapon)) {
       return undefined;
     }
 
-    return getTheWinner(opponentWeapon, playerWeapon);
-  }, [playerWeapon, opponentWeapon]);
+    return getTheWinner(opponent.weapon, player.weapon);
+  }, [player.weapon, opponent?.weapon]);
 
   const handleWeaponSelect = (weapon: Weapons) => {
-    const computerWeapon = letTheComputerPlay();
-    setPlayerWeapon(weapon);
-    setOpponentWeapon(computerWeapon);
     onWeaponSelect(weapon);
   };
 
   return (
     <>
       {!result && (
-        <ChooseYourWeapon name={name} handleWeaponSelect={handleWeaponSelect} />
+        <ChooseYourWeapon
+          name={player.name}
+          handleWeaponSelect={handleWeaponSelect}
+        />
       )}
-      {hasPlayerPlayed && (
+      {!!player.weapon && (
         <h2 className="text-2xl text-amber-500">
-          You selected {playerWeapon} {getOptionEmoji(playerWeapon)}
+          You selected {player.weapon} {getOptionEmoji(player.weapon)}
         </h2>
       )}
-      {hasOpponentPlayed && (
+      {!!opponent?.weapon && !!player.weapon && (
         <h2 className="text-2xl text-amber-300">
-          {opponentName} chose {opponentWeapon} {getOptionEmoji(opponentWeapon)}
+          {opponent.name} chose {opponent.weapon}{' '}
+          {getOptionEmoji(opponent.weapon)}
         </h2>
       )}
-      {!!result && (
-        <Result status={result} opponentName={opponentName} name={name} />
+      {!!result && opponent?.name && (
+        <Result
+          status={result}
+          opponentName={opponent?.name}
+          name={player.name}
+        />
       )}
     </>
   );
-};
-
-export default Match;
+}

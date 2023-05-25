@@ -18,7 +18,7 @@ export const weaponEmojiMap: Record<Weapons, string> = {
   [weapons.scissors]: '✂️️️',
 };
 
-export const opponentNamesMap: Record<Weapons, string> = {
+export const aiNamesMap: Record<Weapons, string> = {
   [weapons.rock]: 'Dwayne',
   [weapons.paper]: 'Michael',
   [weapons.scissors]: 'Edward',

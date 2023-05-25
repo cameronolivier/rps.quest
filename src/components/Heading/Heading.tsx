@@ -4,7 +4,11 @@ type Props = {
   children: ReactNode;
 };
 function Heading({ children }: Props) {
-  return <h1 className="mb-5 text-amber-500">{children}</h1>;
+  return (
+    <h1 className="m-4 scroll-m-20 text-3xl font-extrabold tracking-tight text-violet-300 lg:text-4xl">
+      {children}
+    </h1>
+  );
 }
 
 export default Heading;

@@ -12,14 +12,17 @@ export default function ChooseYourWeapon({ name, handleWeaponSelect }: Props) {
       <div className="flex w-full items-center justify-center">
         <WeaponSelect
           name="🤘"
+          label={weapons.rock}
           onClick={() => handleWeaponSelect(weapons.rock)}
         />
         <WeaponSelect
           name="📄"
+          label={weapons.paper}
           onClick={() => handleWeaponSelect(weapons.paper)}
         />
         <WeaponSelect
           name="✂️️️"
+          label={weapons.scissors}
           onClick={() => handleWeaponSelect(weapons.scissors)}
         />
       </div>
