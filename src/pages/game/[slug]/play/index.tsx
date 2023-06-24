@@ -11,7 +11,7 @@ import { tw } from '~/utils/tailwind.utils';
 
 export default function PlayPage() {
   const router = useRouter();
-  const { slug, userId, userGameId } = router.query as {
+  const { userId, userGameId } = router.query as {
     slug: string;
     userId: string;
     userGameId: string;
@@ -58,7 +58,6 @@ export default function PlayPage() {
     <>
       {isComputer && data?.player && (
         <PlayComputer
-          slug={slug}
           name={data.player.name || 'Player 1'}
           handleWeaponSelect={handleWeaponSelect}
         />

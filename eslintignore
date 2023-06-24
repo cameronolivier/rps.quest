@@ -1,6 +1,12 @@
-dist/*
-.cache
-public
-node_modules
 *.esm.js
-
+.cache
+.contentlayer
+.next
+.yarn
+build
+CHANGELOG.md
+dist/*
+node_modules
+package-lock.json
+package.json
+public
